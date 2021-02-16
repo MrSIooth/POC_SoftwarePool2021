@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import {PORT, HELLO_MESSAGE} from 'serverConfig';
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
@@ -8,10 +9,10 @@ const app = express();
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-const port = 8080;
+const port = PORT;
 
 app.get('/hello', (req: any, res: any) => {
-  res.send('world!');
+  res.send(HELLO_MESSAGE);
 });
 
 app.get('/repeat-my-query', (req: Request, res: Response) => {
