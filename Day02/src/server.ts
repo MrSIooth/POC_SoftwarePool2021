@@ -8,6 +8,11 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+interface obj{
+  key : any;
+  value : any;
+}
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 const port = PORT;
@@ -61,8 +66,13 @@ app.get('/health', (req: Request, res: Response) => {
 });
 
 app.get('/repeat-all-my-queries', (req: Request, res: Response) => {
-  const temp = { key: '<key of the query>', value: '<value of the query>' };
-  res.send(temp);
+  const tab : Array<obj> = [];
+  const query = req.query;
+  for (const elem in query) {
+    const temp : obj = { key: elem, value: query[elem] };
+    tab.push(temp);
+  }
+  res.send(tab);
 });
 
 app.listen(port);
