@@ -138,4 +138,14 @@ app.get('/cookies/me', (req: Request, res: Response) => {
   }
 });
 
+app.post('//jwt/register', (req: Request, res: Response) => {
+  if (req.body.email !== undefined && req.body.password !== undefined) {
+    const temp : User = { email: req.body.email, password: req.body.password };
+    users.push(temp);
+  } else {
+    res.status(StatusCodes.BAD_REQUEST);
+    res.send('Bad Request');
+  }
+});
+
 app.listen(port);
